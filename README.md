@@ -1,1 +1,1 @@
-# programming-languages
+лабы по языкам программирования
