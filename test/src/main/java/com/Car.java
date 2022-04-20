@@ -3,47 +3,11 @@ package com;
 import java.util.Scanner;
 
 public class Car {
-    private int speed = 10;
-    private int time = 10;
-    private double fuel = 10;
-    private String typeFuel = "92";
+    private int speed;
+    private int time;
+    private double fuel;
+    private String typeFuel = "";
 
-    public void setSpeed(int speed) {
-        if(speed >= 0) {
-            this.speed = speed;
-        } else {
-            System.out.println("Speed below zero");
-        }
-    }
-    public void setFuel(double fuel) {
-        if(fuel >= 0){
-        this.fuel = fuel;
-        } else {
-            System.out.println("fuel below zero");
-        }
-    }
-    public void setTime(int time){
-        if(time >= 0){
-        this.time = time;
-        } else {
-            System.out.println("time below zero");
-        }
-    }
-    public void setTypeFuel(String typeFuel) {
-        this.typeFuel = typeFuel;
-    }
-    public double getFuel() {
-        return fuel;
-    }
-    public int getTime() {
-        return time;
-    }
-    public int getSpeed() {
-        return speed;
-    }
-    public String getTypeFuel() {
-        return typeFuel;
-    }
     int  drive (int speed, int time){
         System.out.println("distance = " + speed * time);
         return speed * time;
@@ -51,14 +15,12 @@ public class Car {
     double refuel(double fuel, String typeFuel){
         boolean full = false;
         int num = 60;
-        while (full == false){
-            if(fuel < 60){
-                System.out.println("Refuelling");
-                fuel++;
-                num--;
-            } else {
-                full = true;
-            }
+        System.out.println("Refulling");
+        while (!full) if (fuel < 60) {
+            fuel++;
+            num--;
+        } else {
+            full = true;
         }
         double price = price(typeFuel);
         price *= (60 - num);
@@ -67,7 +29,6 @@ public class Car {
         return fuel;
     }
     double price(String typeFuel) {
-        Scanner input = new Scanner(System.in);
         if (typeFuel.equals("92")) {
             return 49.2;
         }
@@ -79,24 +40,10 @@ public class Car {
         }
         return 1;
     }
-}
-
-class Main{
-    static Scanner input = new Scanner(System.in);
-    public static void main(String[] args){
-        Car car = new Car();
-        int speed = car.getSpeed();
-        int time = car.getTime();
-        double fuel = car.getFuel();
-        String typeFuel = car.getTypeFuel();
-        car.drive(speed, time);
-        car.refuel(fuel, typeFuel);
-        int newSpeed = input.nextInt();
-        car.setSpeed(newSpeed);
-        int newTime = input.nextInt();
-        car.setTime(newTime);
-        double newFuel = input.nextInt();
-        car.setFuel(newFuel);
+    double consumprion(int speed, int time, int fuel){
+        //Метод считает рассход топлива на 100 км
+        return ((double) (60 - fuel)/(speed * time)) * 100;
     }
 }
+
 
